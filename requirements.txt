@@ -1,0 +1,12 @@
+feedparser
+requests
+beautifulsoup4
+pandas
+scikit-learn
+sentence-transformers
+networkx
+streamlit
+plotly
+anthropic
+pyyaml
+python-dotenv

@@ -1,0 +1,38 @@
+# Liste over RSS-kilder for innhenting.
+# Startliste med store, brede internasjonale nyhetskilder.
+# NB: RSS-URL-er endrer seg over tid og er ikke verifisert live her —
+# test/luk ut døde feeds ved første kjøring (fetch_source() logger feil per kilde
+# og lar batch-jobben fortsette, så én død feed skal ikke stoppe resten).
+sources:
+  - name: BBC World
+    url: http://feeds.bbci.co.uk/news/world/rss.xml
+  - name: Al Jazeera
+    url: https://www.aljazeera.com/xml/rss/all.xml
+  - name: The Guardian World
+    url: https://www.theguardian.com/world/rss
+  - name: NPR World
+    url: https://feeds.npr.org/1004/rss.xml
+  - name: New York Times World
+    url: https://rss.nytimes.com/services/xml/rss/nyt/World.xml
+  - name: CNN World
+    url: http://rss.cnn.com/rss/edition_world.rss
+  - name: Deutsche Welle World
+    url: https://rss.dw.com/rdf/rss-en-world
+  - name: France24
+    url: https://www.france24.com/en/rss
+  - name: Sky News World
+    url: https://feeds.skynews.com/feeds/rss/world.xml
+  - name: Euronews
+    url: https://www.euronews.com/rss?level=theme&name=news
+  - name: South China Morning Post
+    url: https://www.scmp.com/rss/91/feed
+  - name: Japan Times
+    url: https://www.japantimes.co.jp/feed/
+  - name: ABC News Australia
+    url: https://www.abc.net.au/news/feed/51120/rss.xml
+  - name: Times of India World
+    url: https://timesofindia.indiatimes.com/rssfeeds/296589292.cms
+  - name: Washington Post World
+    url: http://feeds.washingtonpost.com/rss/world
+  - name: Le Monde English
+    url: https://www.lemonde.fr/en/rss/une.xml
