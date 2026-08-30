@@ -21,23 +21,19 @@ REQUEST_TIMEOUT_SECONDS = 10
 
 @dataclass
 class RawArticle:
-    """One article exactly as it came off the RSS feed, before any ETL cleaning."""
+    """Article exactly as it came off the RSS feed"""
 
     source: str
     title: str
     link: str
     published: Optional[str]
-    """Raw, unparsed date string exactly as the feed wrote it (format varies by source)."""
     published_parsed: Optional[str]
-    """published, normalized to an ISO 8601 UTC string by feedparser's own date parsing.
-    None if the entry had no parseable date. Use this one for anything that needs a
-    real datetime (e.g. dim_dato) — don't re-parse `published` yourself."""
     summary: Optional[str]
     fetched_at: str
 
 
 def _parsed_struct_to_iso(struct: Optional[time.struct_time]) -> Optional[str]:
-    """Convert feedparser's *_parsed (a UTC time.struct_time) to an ISO 8601 string."""
+    """Convert feedparser's *_parsed (a UTC time.struct_time) to an ISO 8601 string"""
     if struct is None:
         return None
     return datetime(*struct[:6], tzinfo=timezone.utc).isoformat()
@@ -51,14 +47,6 @@ def load_sources(config_path: Path = CONFIG_PATH) -> list[dict]:
 
 def fetch_source(source: dict) -> list[RawArticle]:
     """Fetch and parse a single RSS feed.
-
-    Feed parsing errors are logged, not raised, so a malformed feed doesn't
-    take down the whole batch run in fetch_all(). Fetching goes through
-    requests (not feedparser's own URL handling) so we get an explicit,
-    short timeout — feedparser.parse(url) otherwise falls back to the OS
-    socket default, which can leave one slow/hanging source stalling the
-    whole batch for a long time (observed ~44s against a timed-out feed
-    during testing).
     """
     name = source["name"]
     url = source["url"]

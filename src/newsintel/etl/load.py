@@ -1,8 +1,7 @@
-"""Load cleaned articles into the star schema, idempotently.
-
+"""Load cleaned articles into the star schema.
 Safe to call repeatedly with overlapping data (e.g. across batch runs) --
 dim_source/dim_date rows are reused via get-or-create, and fact_news rows
-are skipped (not duplicated) if the same link was already loaded.
+are skipped if the same link is already loaded.
 """
 
 from __future__ import annotations
@@ -21,8 +20,6 @@ def get_or_create_source(conn: sqlite3.Connection, name: str, url: str) -> int:
 
 
 def get_or_create_date(conn: sqlite3.Connection, date_str: str) -> int:
-    """date_str must be an ISO 8601 date/datetime string, and must not be None --
-    callers decide the fallback (e.g. fetched_at) before calling this."""
     date = datetime.fromisoformat(date_str).date()
     date_iso = date.isoformat()
 
@@ -35,12 +32,7 @@ def get_or_create_date(conn: sqlite3.Connection, date_str: str) -> int:
 
 
 def load_article(conn: sqlite3.Connection, article: dict, source_url: str) -> None:
-    """Insert one cleaned article into fact_news.
-
-    `article["published"]` is stored as-is (possibly None) -- we never fabricate
-    a publish date. `date_id` always needs a value though (NOT NULL), so it falls
-    back to fetched_at's date for grouping purposes only when published is unknown.
-    """
+    """Insert one cleaned article into fact_news."""
     source_id = get_or_create_source(conn, article["source"], source_url)
 
     date_str = article["published_parsed"] or article["fetched_at"]

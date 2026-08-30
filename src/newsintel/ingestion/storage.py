@@ -1,14 +1,8 @@
 """Persist raw fetched articles to disk, one newline-delimited JSON file per run.
-
-Kept separate from fetch.py: fetching and persisting are different
-responsibilities, and it lets fetch_all() be tested without touching disk.
-
-  - Skriver artiklene som JSON Lines (én JSON-linje per artikkel) til data/raw/, med filnavn = tidspunkt for
-    kjøringen. Hver batch-kjøring blir dermed sin egen fil — du får en full historikk av rå-hentinger, og
-    ETL-steget ditt kan senere velge å lese én fil, flere, eller alle.
-  - Dette er "rålaget" — helt ubehandlet, rett fra RSS. Rensing/strukturering til star schema er bevisst IKKE
-    gjort her, det er jobben til ETL-modulen du skal bygge selv.
-
+  - Writes articles as JSON Lines (one JSON line per article) to data/raw/, with the filename set to
+    the run's timestamp. Each batch run therefore gets its own file. You get a full history of raw
+    fetches, and the ETL step can later choose to read one file, several, or all of them.
+  - This is the raw layer. Unprocessed, straight from RSS.
 """
 
 import json
@@ -22,11 +16,7 @@ RAW_DATA_DIR = Path(__file__).resolve().parents[3] / "data" / "raw"
 
 
 def save_raw_articles(articles: list[RawArticle], output_dir: Path = RAW_DATA_DIR) -> Path:
-    """Write articles as JSONL to a timestamped file, one file per run.
-
-    Raw data is intentionally kept as-is here (no cleaning/deduping) — that's
-    the ETL step's job, working off these files.
-    """
+    """Write articles as JSONL to a timestamped file, one file per run."""
     output_dir.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     output_path = output_dir / f"{timestamp}.jsonl"
