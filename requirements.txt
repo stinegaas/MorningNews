@@ -2,11 +2,13 @@ feedparser
 requests
 beautifulsoup4
 pandas
+numpy
 scikit-learn
 sentence-transformers
 networkx
 streamlit
 plotly
 anthropic
+pydantic
 pyyaml
 python-dotenv
