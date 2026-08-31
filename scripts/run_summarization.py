@@ -4,10 +4,8 @@
 Requires ANTHROPIC_API_KEY to be set (or an `ant auth login` profile).
 
 Run with:  python scripts/run_summarization.py
-Depends on article_clusters already being populated -- run
-scripts/run_clustering.py first. THRESHOLD/MIN_SAMPLES here must match what
-run_clustering.py actually persisted, since cluster_label only means
-something relative to that specific config.
+Run scripts/run_clustering.py first. 
+THRESHOLD/MIN_SAMPLES here must match what run_clustering.py actually persisted.
 """
 
 import logging

@@ -2,8 +2,7 @@
 Uses a pretrained model to embed title + summary text -> later steps 
 (clustering, trend detection) can work with semantic similarity instead of raw text.
 
-Stored in its own table, not as a column on fact_news: embeddings are a
-derived artifact of a specific model, not raw warehouse data. This way
+Stored in its own table, not as a column on fact_news. This way
 they can be regenerated without touching the star schema, and
 sit alongside a future, separate TF-IDF representation without collision.
 """

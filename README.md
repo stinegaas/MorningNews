@@ -4,6 +4,8 @@ A personal data engineering/AI project: ingest international news via RSS, clust
 
 Built as a learning project focused on data + AI engineering: the clustering algorithm is built from scratch, evaluated empirically against multiple metrics before picking a configuration, and the pipeline runs on top of a star-schema data warehouse.
 
+**Development note:** core logic (data warehouse schema, cleaning rules, DBSCAN clustering and trend ranking) was built by hand. Claude Code was used to implement supporting infrastructure (RSS ingestion, data loading, embeddings, LLM summarization, and the dashboard) under active review.
+
 ## Pipeline
 
 ```
@@ -16,7 +18,7 @@ RSS feeds (~15 international sources)
   -> streamlit run app.py  dashboard: trending stories, ranked and summarized
 ```
 
-Each step reads from the warehouse and writes back to it. The pipeline is re-run manually by Stine (see below), not on a schedule.
+Each step reads from the warehouse and writes back to it. The pipeline is re-run manually (see below), not on a schedule.
 
 
 ## Data warehouse

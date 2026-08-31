@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """Entry point for a single ETL run.
 
-Meant to run after fetch_news.py — reads every raw batch file in data/raw/,
+Meant to run after fetch_news.py. Reads every raw batch file in data/raw/,
 cleans each article, and loads it into the star schema database. Safe to run
-repeatedly / over overlapping raw files: loading is idempotent (see
+repeatedly/over overlapping raw files: loading is idempotent (see
 newsintel.etl.load) and schema creation is CREATE TABLE IF NOT EXISTS.
 
 Run with:  python scripts/run_etl.py

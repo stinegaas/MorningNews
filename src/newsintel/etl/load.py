@@ -1,7 +1,5 @@
-"""Load cleaned articles into the star schema.
-Safe to call repeatedly with overlapping data (e.g. across batch runs) --
-dim_source/dim_date rows are reused via get-or-create, and fact_news rows
-are skipped if the same link is already loaded.
+"""Load cleaned articles into the star schema. Safe to call repeatedly with overlapping data (e.g. across batch runs).
+dim_source/dim_date rows are reused via get-or-create, and fact_news rows are skipped if the same link is already loaded.
 """
 
 from __future__ import annotations

@@ -1,11 +1,9 @@
 """Compute TF-IDF vectors for articles.
 
-TF-IDF is not persisted, unlike embeddings. Has to be fit on everything all at once, 
-it's cheap to recompute (sub-second at this corpus size). You get fresh vectors 
-computed on demand instead of reading from a stored table.
+TF-IDF is not persisted, unlike embeddings. Has to be fit on everything all at once. 
 
 Uses the same combine_text() as embeddings.py, so both representations see
-identical input text -- needed for a fair comparison between the two.
+identical input text. Needed for a fair comparison.
 """
 
 from __future__ import annotations

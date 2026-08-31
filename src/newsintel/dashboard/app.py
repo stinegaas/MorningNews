@@ -1,9 +1,6 @@
 """Streamlit dashboard: trending stories from the news warehouse.
 
-Depends on the earlier pipeline steps already having run: article_clusters
-(scripts/run_clustering.py) and, for LLM summaries to show up, cluster_summaries
-(scripts/run_summarization.py) -- this dashboard only reads, it never
-generates clusters or summaries itself.
+Depends on the earlier pipeline steps already having run.
 
 Run with:  streamlit run src/newsintel/dashboard/app.py
 """
@@ -35,10 +32,8 @@ def get_conn():
 
 
 def get_data_max_date(conn) -> date:
-    """Default for the as_of picker. The dataset is a static snapshot (last
-    fetch 2026-08-23), not live-updating, so defaulting to real "today" would
-    show an empty window until fetch_news.py runs again -- same reasoning as
-    rank_trends' own as_of parameter."""
+    """Default for the as_of picker. The dataset is a static snapshot, not live-updating, so defaulting to real "today" would
+    show an empty window until fetch_news.py runs again."""
     row = conn.execute("SELECT MAX(date) FROM dim_date").fetchone()
     return date.fromisoformat(row[0])
 
